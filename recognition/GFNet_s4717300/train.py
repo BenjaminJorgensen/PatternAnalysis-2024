@@ -91,7 +91,6 @@ def train_model():
 
             output = model(images)
             loss = criterion(output, labels)
-            losses.append(loss.item())
 
             # Backward and optimize
             optimizer.zero_grad()
@@ -101,6 +100,7 @@ def train_model():
         
             if i % 100 == 0:
                 print ("Epoch [{}/{}], Step [{}/{}] Loss: {:.5f}" .format(epoch+1, epochs, i+1, total_step, loss.item()))
+                losses.append(loss.item())
 
         acc_hist.append(evaluate_model())
     torch.save(model.state_dict(), 'GFNET-{}.pth'.format(round(acc_hist[-1]), 4))
