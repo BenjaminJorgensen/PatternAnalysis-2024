@@ -24,7 +24,7 @@ drop_path = 0.3
 batches = 512
 patch_size = 16
 embed_dim = 256
-depth = 12
+depth = 5
 ff_ratio = 4.0
 epochs = 30
 
