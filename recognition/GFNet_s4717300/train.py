@@ -166,10 +166,11 @@ if __name__ == '__main__':
     img_shape = (channels, image_size, image_size)
 
     if not training or not test:
-        print("Problem loading data, please check dataset is commpatable with dataloader including all hyprparameters")
+        print("Problem loading data, please check dataset is \
+                commpatable with dataloader including all hyprparameters")
         exit(1)
 
-
+    # Create model
     model = GFNet(img_size=image_size,
                      patch_size=env.patch_size,
                      in_chans=channels,
@@ -184,8 +185,8 @@ if __name__ == '__main__':
     if env.model_path:
         model.load_state_dict(torch.load(env.model_path, weights_only=False))
 
+    # Prepare model training
     criterion = torch.nn.CrossEntropyLoss(label_smoothing=0.1).to(device)
-
     optimizer = torch.optim.AdamW(model.parameters(), lr=env.learning_rate, weight_decay=env.weight_decay) #type: ignore
     scheduler = OneCycleLR(optimizer,max_lr=env.learning_rate, steps_per_epoch=len(training), epochs=env.epochs)
 

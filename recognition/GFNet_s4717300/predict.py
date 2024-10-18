@@ -79,9 +79,6 @@ def evaluate_model(model, test_set, criterion, env, device, estimate=True):
     print("=============================")
     return accuracy, (avg_loss / count)
 
-def inference(model, image):
-    pass
-
 if __name__ == '__main__':
     # Setting up CUDA
     device = torch.device("cuda:0" if (torch.cuda.is_available()) else "cpu")
@@ -159,7 +156,7 @@ if __name__ == '__main__':
                 are different to those in Utils.py. Please these values and then re-reun this command')
         exit(1)
 
-
+    # Perform evaluation
     if args.evaluation:
         criterion = torch.nn.CrossEntropyLoss(label_smoothing=0.1).to(device)
         evaluate_model(model, val, criterion, basic_env, device, estimate=False)
